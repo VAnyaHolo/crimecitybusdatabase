@@ -87,35 +87,47 @@ overflow-wrap: anywhere;
 
 <h3>Регистрация</h3>
 
+<div id="auth_panel">
 <form id="signup-form">
 <input type="text" id="signup-username"
 placeholder="Имя пользователя"
 minlength="3" maxlength="24" required>
-
+</form>
+</section>
+</div>
+<div id="auth_panel">
 <input type="email" id="signup-email"
 placeholder="Электронная почта" required>
-
+</div>
+<div id="auth_panel">
 <input type="password" id="signup-password"
 placeholder="Пароль" minlength="8" required>
-
+</div>
 <button type="submit">Зарегистрироваться</button>
 </form>
 
 <h3>Вход</h3>
 
+<div id="auth_panel">
 <form id="login-form">
 <input type="email" id="login-email"
 placeholder="Электронная почта" required>
-
+</div>
+<div id="auth_panel">
 <input type="password" id="login-password"
 placeholder="Пароль" required>
-
+</div>
 <button type="submit">Войти</button>
 </form>
 
 <p id="auth-message"></p>
 
 </section>
+<div id="account-panel" style="display: none;">
+<p>Вы вошли в аккаунт: <span id="account-email"></span></p>
+
+<button id="logout-btn">Выйти</button>
+</div>
 
 <section>
 <h2>Обсуждения</h2>
@@ -232,6 +244,47 @@ console.error(error);
 }
 
 loadPosts();
+</script>
+
+<script>
+const authPanel = document.getElementById('auth-panel');
+const accountPanel = document.getElementById('account-panel');
+const accountEmail = document.getElementById('account-email');
+const logoutBtn = document.getElementById('logout-btn');
+
+// Обновление интерфейса авторизации
+function updateAuthUI(session) {
+if (session && session.user) {
+authPanel.style.display = 'none';
+accountPanel.style.display = 'block';
+
+accountEmail.textContent = session.user.email;
+} else {
+authPanel.style.display = 'block';
+accountPanel.style.display = 'none';
+
+accountEmail.textContent = '';
+}
+}
+
+// Проверяем, вошёл ли пользователь
+supabase.auth.getSession().then(({ data }) => {
+updateAuthUI(data.session);
+});
+
+// Отслеживаем регистрацию, вход и выход
+supabase.auth.onAuthStateChange((event, session) => {
+updateAuthUI(session);
+});
+
+// Кнопка выхода
+logoutBtn.addEventListener('click', async () => {
+const { error } = await supabase.auth.signOut();
+
+if (error) {
+alert('Ошибка выхода: ' + error.message);
+}
+});
 </script>
 
 </body>
