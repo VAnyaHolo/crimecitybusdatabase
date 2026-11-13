@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ПАЗ-3206-60 Б/Н 2 — CRIME CITY</title>
+<link rel="stylesheet" href="css/style.css">
+
+
+<style>
+.bus-card {
+background: #ffffff;
+border: 1px solid #dddddd;
+border-radius: 12px;
+padding: 20px;
+margin-top: 20px;
+color: #222222;
+}
+
+.plate {
+display: inline-block;
+padding: 8px 18px;
+background: #eeeeee;
+color: #111111;
+border: 2px solid #222222;
+border-radius: 5px;
+font-weight: bold;
+font-size: 22px;
+}
+
+.bus-info {
+margin-top: 20px;
+}
+
+.bus-info p {
+padding: 10px 0;
+border-bottom: 1px solid #eeeeee;
+color: #222222;
+}
+
+.status {
+color: #801616;
+font-weight: bold;
+}
+
+
+.photo-gallery {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+gap: 15px;
+margin-top: 15px;
+}
+
+.photo-gallery img {
+width: 100%;
+height: 200px;
+object-fit: cover;
+border-radius: 8px;
+border: 1px solid #dddddd;
+cursor: pointer;
+transition: transform 0.2s;
+}
+
+.photo-gallery img:hover {
+transform: scale(1.02);
+}
+.photo-gallery {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+gap: 18px;
+margin-top: 20px;
+}
+
+.photo-card {
+background: #ffffff;
+border: 1px solid #dddddd;
+border-radius: 10px;
+overflow: hidden;
+color: #222222;
+}
+
+.photo-card img {
+width: 100%;
+height: 190px;
+object-fit: cover;
+display: block;
+cursor: pointer;
+transition: 0.2s;
+}
+
+.photo-card img:hover {
+opacity: 0.85;
+}
+
+.photo-details {
+padding: 12px;
+}
+
+.photo-details p {
+margin: 5px 0;
+color: #555555;
+font-size: 14px;
+}
+#photo-viewer {
+display: none;
+position: fixed;
+z-index: 9999;
+inset: 0;
+background: rgba(0, 0, 0, 0.92);
+justify-content: center;
+align-items: center;
+padding: 20px;
+}
+
+#large-photo {
+max-width: 95%;
+max-height: 90vh;
+object-fit: contain;
+border-radius: 6px;
+}
+
+.close-photo {
+position: absolute;
+top: 15px;
+right: 25px;
+color: white;
+font-size: 40px;
+cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+<h1>ПАЗ-3206-60</h1>
+<p>Автобус №0008</p>
+</header>
+
+<main>
+<section class="bus-card">
+
+<div class="plate">Б/Н 2</div>
+
+<div class="bus-info">
+<p><strong>Инвентарный номер:</strong> 0008</p>
+<p><strong>Модель:</strong> ПАЗ-3206-60</p>
+<p><strong>Статус:</strong>
+<span class="status">Списан</span>
+</p>
+<p><strong>Принадлежит:</strong> Таксопарк Jetta Taxi </p>
+<p><strong>Поступил, выбыл:</strong> ???, 2026</p>
+<p><strong>Назначение:</strong> Служебный </p>
+<p><strong>Примечание:</strong> Желтый </p>
+</div>
+
+<h2>Фотографии</h2>
+
+<div class="photo-gallery">
+
+<div class="photo-card">
+<img src="images/photo12.jpg" alt="ПАЗ-3206-60"
+onclick="openPhoto(this.src)">
+<div class="photo-details">
+<strong>Фотография №1</strong>
+<p> Дата: 31 октября 2026</p>
+<p> Место: Территория таксопарка "Jetta Taxi", г. Южный </p>
+</div>
+<div id="photo-viewer" onclick="closePhoto()">
+<span class="close-photo">&times;</span>
+<img id="large-photo" src="" alt="Увеличенная фотография">
+</div>
+
+<script>
+function openPhoto(src) {
+document.getElementById("large-photo").src = src;
+document.getElementById("photo-viewer").style.display = "flex";
+}
+
+function closePhoto() {
+document.getElementById("photo-viewer").style.display = "none";
+}
+</script>
+
+</section>
+
+</main>
+
+<footer>
+CRIME CITY Bus Database © 2026
+</footer>
+
+</body>
+</html>
+
