@@ -395,6 +395,26 @@ searchResults.appendChild(result);
 });
 </script>
 
+<div id="page-views">Просмотры — загружаются...</div>
+
+<script type="module">
+import { supabase } from './js/supabase.js';
+
+const counter = document.getElementById('page-views');
+
+const { data, error } = await supabase.rpc('increment_page_view', {
+p_page_id: 'cr-mp'
+});
+
+if (error) {
+console.error('Ошибка счётчика:', error);
+counter.textContent = 'Просмотры — недоступно';
+} else {
+counter.textContent = `Просмотры — ${data}`;
+}
+</script>
+
+
 </body>
 
 </html>
